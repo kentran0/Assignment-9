@@ -1,0 +1,56 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class User {
+protected:
+    string username;
+
+public:
+    User(string name) {
+        username = name;
+    }
+
+    virtual void accessLevel() {
+        cout << username << "general access" << endl;
+    }
+};
+
+class Employee : public User {
+public:
+    Employee(string name) : User(name) {}
+
+    void accessLevel() override {
+        cout << username << "view inventory" << endl;
+    }
+};
+
+class Manager : public User {
+public:
+    Manager(string name) : User(name) {}
+
+    void accessLevel() override {
+        cout << username << "view and update inventory" << endl;
+    }
+};
+
+class Admin : public User {
+public:
+    Admin(string name) : User(name) {}
+
+    void accessLevel() override {
+        cout << username << "full access: add, update, delete inventory" << endl;
+    }
+};
+
+int main() {
+    Employee e("employee ");
+    Manager m("manager ");
+    Admin a("admin ");
+
+    e.accessLevel();
+    m.accessLevel();
+    a.accessLevel();
+
+    return 0;
+}
